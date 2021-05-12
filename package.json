@@ -47,11 +47,12 @@
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/"
+    "url": "https://github.com/neysapatel"
   },
-  "homepage": "https://github.com/",
+  "homepage": "https://github.com/neysapatel",
   "engines": {
     "node": "12.4.0",
     "npm": "6.9.0"
-  }
+  },
+  "keywords": []
 }
