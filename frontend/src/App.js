@@ -1,19 +1,19 @@
 import React from 'react';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import './App.css';
-import HomeScreen from './screens/HomeScreen';
-import ProductScreen from './screens/ProductScreen';
-import CartScreen from './screens/CartScreen';
-import SigninScreen from './screens/SigninScreen';
+import HomePage from './pages/HomePage';
+import ViewProductDetailsPage from './pages/ViewProductDetailsPage';
+import CartPage from './pages/CartPage';
+import LoginPage from './pages/LoginPage';
 import { useSelector } from 'react-redux';
-import RegisterScreen from './screens/RegisterScreen';
-import ProductsScreen from './screens/ProductsScreen';
-import ShippingScreen from './screens/ShippingScreen';
-import PaymentScreen from './screens/PaymentScreen';
-import PlaceOrderScreen from './screens/PlaceOrderScreen';
-import OrderScreen from './screens/OrderScreen';
-import ProfileScreen from './screens/ProfileScreen';
-import OrdersScreen from './screens/OrdersScreen';
+import CreateAccountPage from './pages/CreateAccountPage';
+import ManageProductsPage from './pages/ManageProductsPage';
+import ShippingPage from './pages/ShippingPage';
+import PaymentPage from './pages/PaymentPage';
+import PlaceOrderPage from './pages/PlaceOrderPage';
+import MakePaymentPage from './pages/MakePaymentPage';
+import CustomerAccountDetailsPage from './pages/CustomerAccountDetailsPage';
+import ManageOrdersPage from './pages/ManageOrdersPage';
 
 function App() {
   const userSignin = useSelector((state) => state.userSignin);
@@ -43,19 +43,19 @@ function App() {
         </header>
         <main className="main">
           <div className="content">
-            <Route path="/orders" component={OrdersScreen} />
-            <Route path="/profile" component={ProfileScreen} />
-            <Route path="/order/:id" component={OrderScreen} />
-            <Route path="/products" component={ProductsScreen} />
-            <Route path="/shipping" component={ShippingScreen} />
-            <Route path="/payment" component={PaymentScreen} />
-            <Route path="/placeorder" component={PlaceOrderScreen} />
-            <Route path="/signin" component={SigninScreen} />
-            <Route path="/register" component={RegisterScreen} />
-            <Route path="/product/:id" component={ProductScreen} />
-            <Route path="/cart/:id?" component={CartScreen} />
-            <Route path="/category/:id" component={HomeScreen} />
-            <Route path="/" exact={true} component={HomeScreen} />
+            <Route path="/orders" component={ManageOrdersPage} />
+            <Route path="/profile" component={CustomerAccountDetailsPage} />
+            <Route path="/order/:id" component={MakePaymentPage} />
+            <Route path="/products" component={ManageProductsPage} />
+            <Route path="/shipping" component={ShippingPage} />
+            <Route path="/payment" component={PaymentPage} />
+            <Route path="/placeorder" component={PlaceOrderPage} />
+            <Route path="/signin" component={LoginPage} />
+            <Route path="/register" component={CreateAccountPage} />
+            <Route path="/product/:id" component={ViewProductDetailsPage} />
+            <Route path="/cart/:id?" component={CartPage} />
+            <Route path="/category/:id" component={HomePage} />
+            <Route path="/" exact={true} component={HomePage} />
           </div>
         </main>
         <footer className="footer">Copyright &copy; 2021 Crochetella. All Rights Reserved.</footer>
