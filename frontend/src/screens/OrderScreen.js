@@ -123,11 +123,11 @@ function OrderScreen(props) {
                   amount={order.totalPrice}
                   onSuccess={handleSuccessPayment} />
               }
-            </li>
-          </ul>
+          </li>
+        </ul>
       </div>
     </div>
-    </div>
+  </div>
 
 }
 
