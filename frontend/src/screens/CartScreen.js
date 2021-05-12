@@ -29,16 +29,16 @@ function CartScreen(props) {
       <ul className="cart-list-container">
         <li>
           <h3>
-            Shopping Cart
+            Items currently in your cart:
           </h3>
           <div>
-            Price
+            Subtotal:
           </div>
         </li>
         {
           cartItems.length === 0 ?
             <div>
-              Cart is empty
+              Your cart is currently empty!
           </div>
             :
             cartItems.map(item =>
@@ -54,19 +54,19 @@ function CartScreen(props) {
 
                   </div>
                   <div>
-                    Qty:
+                    Quantity Selected:
                   <select value={item.qty} onChange={(e) => dispatch(addToCart(item.product, e.target.value))}>
                       {[...Array(item.countInStock).keys()].map(x =>
                         <option key={x + 1} value={x + 1}>{x + 1}</option>
                       )}
                     </select>
                     <button type="button" className="button" onClick={() => removeFromCartHandler(item.product)} >
-                      Delete
+                      Remove from cart
                     </button>
                   </div>
                 </div>
                 <div className="cart-price">
-                  ${item.price}
+                  ${item.price} Per Item
                 </div>
               </li>
             )
@@ -76,12 +76,14 @@ function CartScreen(props) {
     </div>
     <div className="cart-action">
       <h3>
-        Subtotal ( {cartItems.reduce((a, c) => a + c.qty, 0)} items)
-        :
-         $ {cartItems.reduce((a, c) => a + c.price * c.qty, 0)}
+      You currently have {cartItems.reduce((a, c) => a + c.qty, 0)} items in your cart
       </h3>
+      <h3>
+        Your subtotal is ${cartItems.reduce((a, c) => a + c.price * c.qty, 0)}.
+      </h3>
+      <h3></h3>
       <button onClick={checkoutHandler} className="button primary full-width" disabled={cartItems.length === 0}>
-        Proceed to Checkout
+        Checkout now!
       </button>
 
     </div>

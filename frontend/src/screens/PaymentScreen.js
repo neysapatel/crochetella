@@ -21,7 +21,7 @@ function PaymentScreen(props) {
         <form onSubmit={submitHandler}>
           <ul className="form-container">
             <li>
-              <h2>Payment</h2>
+              <h2>Please select your payment method:</h2>
             </li>
 
             <li>
@@ -30,7 +30,7 @@ function PaymentScreen(props) {
                   type="radio"
                   name="paymentMethod"
                   id="paymentMethod"
-                  value="paypal"
+                  value="Paypal"
                   onChange={(e) => setPaymentMethod(e.target.value)}
                 ></input>
                 <label for="paymentMethod">Paypal</label>
@@ -39,7 +39,7 @@ function PaymentScreen(props) {
 
             <li>
               <button type="submit" className="button primary">
-                Continue
+                Continue to payment
               </button>
             </li>
           </ul>

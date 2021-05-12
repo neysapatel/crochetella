@@ -19,7 +19,7 @@ function ProductScreen(props) {
 
   useEffect(() => {
     if (productSaveSuccess) {
-      alert('Review submitted successfully.');
+      alert('Thank you for your review!');
       setRating(0);
       setComment('');
       dispatch({ type: PRODUCT_REVIEW_SAVE_RESET });
@@ -46,8 +46,8 @@ function ProductScreen(props) {
 
   return (
     <div>
-      <div className="back-to-result">
-        <Link to="/">Back to result</Link>
+      <div className="return-home">
+        <Link to="/">RETURN TO THE HOME PAGE</Link>
       </div>
       {loading ? (
         <div>Loading...</div>
@@ -62,34 +62,74 @@ function ProductScreen(props) {
             <div className="details-info">
               <ul>
                 <li>
-                  <h4>{product.name}</h4>
+                  <h3>{product.name}</h3>
                 </li>
-                <li>
-                  <a href="#reviews">
-                    <Rating
-                      value={product.rating}
-                      text={product.numReviews + ' reviews'}
-                    />
-                  </a>
+                <div className="content-margined">
+            <h4>Ratings:
+            {!product.reviews.length && <div>There are currently no ratings or reviews! Add <Link to="/signin">your rating and review</Link> of this product today!</div>} </h4>
+
+            <ul className="review" id="reviews">
+              {product.reviews.map((review) => (
+                <li key={review._id}>
+                  <div>{review.name}</div>
+                  <div>
+                    <Rating value={review.rating}></Rating>
+                  </div>
+                  <div>{review.createdAt.substring(0, 10)}</div>
+                  <div>{review.comment}</div>
                 </li>
-                <li>
-                  Price: <b>${product.price}</b>
-                </li>
-                <li>
-                  Description:
-                  <div>{product.description}</div>
-                </li>
+              ))}
+              <li>
+                {userInfo ? (
+                  <form onSubmit={submitHandler}>
+                    <ul className="form-container">
+                      <li>
+                        <label htmlFor="rating">On a scale of 1 to 5, how would you rate your experience with this product?</label>
+                        <select
+                          name="rating"
+                          id="rating"
+                          value={rating}
+                          onChange={(e) => setRating(e.target.value)}
+                        >
+                          <option value="5">5 - Excellent Experience</option>
+                          <option value="4">4</option>
+                          <option value="3">3</option>
+                          <option value="2">2</option>
+                          <option value="1">1 - Unsatisfactory Experience</option>
+                        </select>
+                      </li>
+                      <li>
+                        <label htmlFor="comment">Please take a moment to write a review and describe your experience with this product:</label>
+                        <textarea
+                          name="comment"
+                          value={comment}
+                          onChange={(e) => setComment(e.target.value)}
+                        ></textarea>
+                      </li>
+                      <li>
+                        <button type="submit" className="button primary">
+                          Submit! Thank you for your review!
+                        </button>
+                      </li>
+                    </ul>
+                  </form>
+                ) : (
+                  <div></div>
+                )}
+              </li>
+            </ul>
+          </div>
               </ul>
-            </div>
+            
             <div className="details-action">
               <ul>
-                <li>Price: {product.price}</li>
                 <li>
-                  Status:{' '}
-                  {product.countInStock > 0 ? 'In Stock' : 'Unavailable.'}
+                  In Stock?:{' '}
+                  {product.countInStock > 0 ? 'Yes, currently available!' : 'Sorry, currently unavailable!'}
                 </li>
+                <li>Price: ${product.price}</li>
                 <li>
-                  Qty:{' '}
+                  How Many?{' '}
                   <select
                     value={qty}
                     onChange={(e) => {
@@ -116,62 +156,6 @@ function ProductScreen(props) {
               </ul>
             </div>
           </div>
-          <div className="content-margined">
-            <h2>Reviews</h2>
-            {!product.reviews.length && <div>There is no review</div>}
-            <ul className="review" id="reviews">
-              {product.reviews.map((review) => (
-                <li key={review._id}>
-                  <div>{review.name}</div>
-                  <div>
-                    <Rating value={review.rating}></Rating>
-                  </div>
-                  <div>{review.createdAt.substring(0, 10)}</div>
-                  <div>{review.comment}</div>
-                </li>
-              ))}
-              <li>
-                <h3>Write a customer review</h3>
-                {userInfo ? (
-                  <form onSubmit={submitHandler}>
-                    <ul className="form-container">
-                      <li>
-                        <label htmlFor="rating">Rating</label>
-                        <select
-                          name="rating"
-                          id="rating"
-                          value={rating}
-                          onChange={(e) => setRating(e.target.value)}
-                        >
-                          <option value="1">1- Poor</option>
-                          <option value="2">2- Fair</option>
-                          <option value="3">3- Good</option>
-                          <option value="4">4- Very Good</option>
-                          <option value="5">5- Excelent</option>
-                        </select>
-                      </li>
-                      <li>
-                        <label htmlFor="comment">Comment</label>
-                        <textarea
-                          name="comment"
-                          value={comment}
-                          onChange={(e) => setComment(e.target.value)}
-                        ></textarea>
-                      </li>
-                      <li>
-                        <button type="submit" className="button primary">
-                          Submit
-                        </button>
-                      </li>
-                    </ul>
-                  </form>
-                ) : (
-                  <div>
-                    Please <Link to="/signin">Sign in</Link> to write a review.
-                  </div>
-                )}
-              </li>
-            </ul>
           </div>
         </>
       )}

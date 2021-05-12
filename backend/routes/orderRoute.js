@@ -53,7 +53,7 @@ router.put("/:id/pay", isAuth, async (req, res) => {
     order.isPaid = true;
     order.paidAt = Date.now();
     order.payment = {
-      paymentMethod: 'paypal',
+      paymentMethod: 'Paypal',
       paymentResult: {
         payerID: req.body.payerID,
         orderID: req.body.orderID,
@@ -61,9 +61,9 @@ router.put("/:id/pay", isAuth, async (req, res) => {
       }
     }
     const updatedOrder = await order.save();
-    res.send({ message: 'Order Paid.', order: updatedOrder });
+    res.send({ message: 'Order paid for', order: updatedOrder });
   } else {
-    res.status(404).send({ message: 'Order not found.' })
+    res.status(404).send({ message: 'Order not found' })
   }
 });
 

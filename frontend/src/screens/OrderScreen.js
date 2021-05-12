@@ -35,8 +35,7 @@ function OrderScreen(props) {
               Shipping
           </h3>
             <div>
-              {order.shipping.address}, {order.shipping.city},
-          {order.shipping.postalCode}, {order.shipping.country},
+              {order.shipping.address}, {order.shipping.city}, {order.shipping.country}, {order.shipping.postalCode}
           </div>
             <div>
               {order.isDelivered ? "Delivered at " + order.deliveredAt : "Not Delivered."}
@@ -55,7 +54,7 @@ function OrderScreen(props) {
             <ul className="cart-list-container">
               <li>
                 <h3>
-                  Shopping Cart
+                  Your Cart
           </h3>
                 <div>
                   Price
@@ -64,7 +63,7 @@ function OrderScreen(props) {
               {
                 order.orderItems.length === 0 ?
                   <div>
-                    Cart is empty
+                    Your cart is currently empty!
           </div>
                   :
                   order.orderItems.map(item =>
@@ -95,41 +94,39 @@ function OrderScreen(props) {
 
         </div>
         <div className="placeorder-action">
+
+        </div>
+        <div className="placeorder-action">
           <ul>
-            <li className="placeorder-actions-payment">
-              {loadingPay && <div>Finishing Payment...</div>}
+          <li>
+            <h3>Please verify the following shipping/billing address:</h3>
+          </li>
+          <li>
+            <div>Pre-Tax Subtotal: ${order.itemsPrice}</div>
+          </li>
+          <li>
+            <div>Cost of Shipping: ${order.shippingPrice}</div>
+          </li>
+          <li>
+            <div>13% Tax in Ontario: ${order.taxPrice}</div>
+          </li>
+          <li>
+            <div>YOUR ORDER TOTAL: ${order.totalPrice}</div>
+          </li>
+          <li>
+            <h1></h1>
+          </li>
+          <li className="placeorder-actions-payment">
+              {loadingPay && <div>Processing Payment, Please Wait</div>}
               {!order.isPaid &&
                 <PaypalButton
                   amount={order.totalPrice}
                   onSuccess={handleSuccessPayment} />
               }
             </li>
-            <li>
-              <h3>Order Summary</h3>
-            </li>
-            <li>
-              <div>Items</div>
-              <div>${order.itemsPrice}</div>
-            </li>
-            <li>
-              <div>Shipping</div>
-              <div>${order.shippingPrice}</div>
-            </li>
-            <li>
-              <div>Tax</div>
-              <div>${order.taxPrice}</div>
-            </li>
-            <li>
-              <div>Order Total</div>
-              <div>${order.totalPrice}</div>
-            </li>
           </ul>
-
-
-
-        </div>
-
       </div>
+    </div>
     </div>
 
 }

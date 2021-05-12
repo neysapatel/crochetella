@@ -16,9 +16,11 @@ function PlaceOrderScreen(props) {
     props.history.push("/payment");
   }
   const itemsPrice = cartItems.reduce((a, c) => a + c.price * c.qty, 0);
-  const shippingPrice = itemsPrice > 100 ? 0 : 10;
-  const taxPrice = 0.15 * itemsPrice;
-  const totalPrice = itemsPrice + shippingPrice + taxPrice;
+  const shippingPrice = itemsPrice > 100 ? 0.00 : 15.00;
+  const taxPrice_unrounded = (0.13 * itemsPrice);
+  const taxPrice = Math.round(taxPrice_unrounded * 100) / 100
+  const totalPrice = (itemsPrice + shippingPrice + taxPrice);
+  
 
   const dispatch = useDispatch();
 
@@ -42,33 +44,32 @@ function PlaceOrderScreen(props) {
       <div className="placeorder-info">
         <div>
           <h3>
-            Shipping
+            Please verify the following shipping/billing address:
           </h3>
           <div>
-            {cart.shipping.address}, {cart.shipping.city},
-          {cart.shipping.postalCode}, {cart.shipping.country},
+            {cart.shipping.address}, {cart.shipping.city}, {cart.shipping.country}, {cart.shipping.postalCode}
           </div>
         </div>
         <div>
-          <h3>Payment</h3>
+          <h3>You are paying with:</h3>
           <div>
-            Payment Method: {cart.payment.paymentMethod}
+            {cart.payment.paymentMethod}
           </div>
         </div>
         <div>
           <ul className="cart-list-container">
             <li>
               <h3>
-                Shopping Cart
+                Your Cart:
           </h3>
               <div>
-                Price
+                Your subtotal:
           </div>
             </li>
             {
               cartItems.length === 0 ?
                 <div>
-                  Cart is empty
+                  Your cart is currently empty!
           </div>
                 :
                 cartItems.map(item =>
@@ -84,11 +85,11 @@ function PlaceOrderScreen(props) {
 
                       </div>
                       <div>
-                        Qty: {item.qty}
+                        Quantity Selected: {item.qty}
                       </div>
                     </div>
                     <div className="cart-price">
-                      ${item.price}
+                      ${item.price} Per Item
                     </div>
                   </li>
                 )
@@ -101,26 +102,25 @@ function PlaceOrderScreen(props) {
       <div className="placeorder-action">
         <ul>
           <li>
+            <h3>Verify the following details:</h3>
+          </li>
+          <li>
+            <div>Pre-Tax Subtotal: ${itemsPrice}</div>
+          </li>
+          <li>
+            <div>Cost of Shipping: ${shippingPrice}</div>
+          </li>
+          <li>
+            <div>13% Tax in Ontario: ${taxPrice}</div>
+          </li>
+          <li>
+            <div>YOUR ORDER TOTAL: ${totalPrice}</div>
+          </li>
+          <li>
+            <h1></h1>
+          </li>
+          <li>
             <button className="button primary full-width" onClick={placeOrderHandler} >Place Order</button>
-          </li>
-          <li>
-            <h3>Order Summary</h3>
-          </li>
-          <li>
-            <div>Items</div>
-            <div>${itemsPrice}</div>
-          </li>
-          <li>
-            <div>Shipping</div>
-            <div>${shippingPrice}</div>
-          </li>
-          <li>
-            <div>Tax</div>
-            <div>${taxPrice}</div>
-          </li>
-          <li>
-            <div>Order Total</div>
-            <div>${totalPrice}</div>
           </li>
         </ul>
 

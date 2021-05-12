@@ -13,10 +13,7 @@ function ProductsScreen(props) {
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
   const [image, setImage] = useState('');
-  const [brand, setBrand] = useState('');
-  const [category, setCategory] = useState('');
   const [countInStock, setCountInStock] = useState('');
-  const [description, setDescription] = useState('');
   const [uploading, setUploading] = useState(false);
   const productList = useSelector((state) => state.productList);
   const { loading, products, error } = productList;
@@ -51,10 +48,7 @@ function ProductsScreen(props) {
     setId(product._id);
     setName(product.name);
     setPrice(product.price);
-    setDescription(product.description);
     setImage(product.image);
-    setBrand(product.brand);
-    setCategory(product.category);
     setCountInStock(product.countInStock);
   };
   const submitHandler = (e) => {
@@ -65,10 +59,7 @@ function ProductsScreen(props) {
         name,
         price,
         image,
-        brand,
-        category,
         countInStock,
-        description,
       })
     );
   };

@@ -47,8 +47,8 @@ function HomeScreen(props) {
           Sort By{' '}
           <select name="sortOrder" onChange={sortHandler}>
             <option value="">Newest</option>
-            <option value="lowest">Lowest</option>
-            <option value="highest">Highest</option>
+            <option value="lowest">Highest</option>
+            <option value="highest">Lowest</option>
           </select>
         </li>
       </ul>
@@ -71,7 +71,6 @@ function HomeScreen(props) {
                 <div className="product-name">
                   <Link to={'/product/' + product._id}>{product.name}</Link>
                 </div>
-                <div className="product-brand">{product.brand}</div>
                 <div className="product-price">${product.price}</div>
                 <div className="product-rating">
                   <Rating

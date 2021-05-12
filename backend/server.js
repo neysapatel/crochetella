@@ -35,3 +35,5 @@ app.get('*', (req, res) => {
 app.listen(config.PORT, () => {
   console.log('Server started at http://localhost:5000');
 });
+
+//npm install @babel/cli @babel/core @babel/node @babel/preset-env nodemon --save-dev
